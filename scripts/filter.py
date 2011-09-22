@@ -1,8 +1,7 @@
 #!/usr/bin/python
 #Drew Carpenter & Jeff Gullett
 #CS 4444
-#Excavare 0.0
-#March 4,2011
+
 import sys
 import pygtk
 import gtk

@@ -1,9 +1,7 @@
 #!/usr/bin/python
 #Drew Carpenter & Jeff Gullett
 #CS 4444
-#Excavare 0.0
-#March 3, 2011
-#this file requires graphics magick to be installed and useable from the command line
+
 import gtk
 import poppler
 import sys
@@ -12,7 +10,6 @@ import os
 import gobject
 
 def get_pdf(self, uri):
-    #uri =
     uri = self.tabFileDictionary[str(self.fileDisplayArea.get_current_page())]
     uri = "file://" + os.path.realpath(uri)
     self.document = poppler.document_new_from_file (uri, None)

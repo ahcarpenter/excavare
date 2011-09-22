@@ -1,15 +1,13 @@
 #!/usr/bin/python
-#!/usr/bin/python
 #Drew Carpenter & Jeff Gullett
 #CS 4444
-#Excavare 0.0
-#20 February 2011
+
 import pygtk
 import gtk
 import sys
 import create_tabs
+
 def open_workspace(self,workspace):
-	"""Workspace is the complete file name of the Excavare workspace to be opened."""
 	file = open(workspace,"r")
 	line = file.readline()
 	split_line = line.split("\t")

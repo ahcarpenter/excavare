@@ -1,8 +1,7 @@
 #!/usr/bin/python
 #Drew Carpenter & Jeff Gullett
 #CS 4444
-#Excavare 0.0
-#March 14, 2011
+
 import sys
 import pygtk
 import gtk
@@ -15,6 +14,7 @@ x = 0
 y = 0
 h=0
 w=0
+
 def image_view_event_box(self,filename,is_pdf):
 	#remove the notebook page
 	#pop last item from textviews list
@@ -45,13 +45,13 @@ def image_view_event_box(self,filename,is_pdf):
 	#since we are immediately converting pdf's to TIFF's for OCR
 	#we will change the extension of .tif to say .pdf IF is_pdf is
 	#True so that the user is not confused
-	if is_pdf:		
+	if is_pdf:
 		extension = tabName[-1].split('.')
 		if extension[1]=="tif":
 			label=tabName[-1]
 			label2=label.replace("0.tif",".pdf")
 			newLabel = gtk.Label(label2)
-	else:	
+	else:
 		newLabel = gtk.Label(tabName[-1])
 	#add page to notebook (index is correct already, so is listStore)
 	
@@ -60,16 +60,17 @@ def image_view_event_box(self,filename,is_pdf):
 	self.notebook.append_page(scrolly,newLabel)
 	#else:
 	#	current_page=self.notebook.get_current_page()
-	#	self.notebook.insert_page(scrolly,newLabel,current_page)	
+	#	self.notebook.insert_page(scrolly,newLabel,current_page)
 	eventBox.set_events(gtk.gdk.BUTTON_PRESS_MASK)
 	eventBox.connect("button_press_event",button_press_event)
 	kids = eventBox.get_children()
 	pixm = kids[0].get_pixmap()
 	self.notebook.show_all()
+
 def button_press_event(widget,event):
 	global count
 	if count==0:
-		global x 
+		global x
 		x = event.x
 		global y
 		y = event.y
@@ -95,13 +96,13 @@ def button_press_event(widget,event):
 		gc = drawable.new_gc()
 		if not flipped:
 			drawable.draw_rectangle(gc,False,int(x),int(y),int(w),int(h))
-		else: 	
+		else:
 			drawable.draw_rectangle(gc,False,int(a),int(b),int(w),int(h))
 		widget.queue_draw()
 		global ocr_ready
 		ocr_ready = True
 		count = 0
-		
+
 def do_ocr(self,filename):
 	current=self.notebook.get_current_page()
 	tm=self.treeview.get_model()
@@ -132,5 +133,6 @@ def do_ocr(self,filename):
 			os.system("tesseract "+filename+" new_file")
 		else:
 			return
+
 def next_page(filename):
 		picture = gtk.gdk.pixbuf_new_from_file(filename)

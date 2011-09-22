@@ -1,11 +1,12 @@
 #!/usr/bin/python
 #Drew Carpenter & Jeff Gullett
 #CS 4444
-#Excavare 0.0
-#20 February 2011
+
 import zipfile
 from docx import *
-def readDocx(buffer, filename):
+
+#extracts raw text from a docx file and places the text into a Gtk.TextBuffer
+def extractRawText(buffer, filename):
 	"""
 	Read a docx file, RAW TEXT ONLY. Inserting a new line to get proper line breaks,
 	keep this in mind as it may cause some issues later, possibly

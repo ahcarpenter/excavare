@@ -1,8 +1,7 @@
 #!/usr/bin/python
 #Drew Carpenter & Jeff Gullett
 #CS 4444
-#Excavare 0.0
-#March 14, 2011
+
 import sys
 import gtk
 import filter
@@ -12,13 +11,15 @@ import pdf
 import docx_to_text
 from workspace import *
 from tabs import *
-#to update glade xml file use this command:
-#gtk-builder-convert tutorial.glade tutorial.xml
 
 class ExcavareMain:
+	
+	#Handlers
+	
 	def on_Excavare_destroy(self, widget, data=None):
 	 	"""Destroys the excavare window"""
 		gtk.main_quit()
+	
 	def on_widget_delete_event(self, widget, event):
 		widget.hide()
 		return True
@@ -34,6 +35,7 @@ class ExcavareMain:
 		(tm, ti) = list_sel.get_selected()
 		self.notebook.set_current_page((tm.get_value(ti, 1)))
 		self.notebook.show_all()
+	
 	def on_ocr_tool_clicked(self,ocr_tool):
 		"""Performs OCR on current tab."""
 		current=self.notebook.get_current_page()
@@ -41,6 +43,7 @@ class ExcavareMain:
 		iter=tm.get_iter(current)
 		filename=tm.get_value(iter,2)
 		drawable.do_ocr(self,filename)
+	
 	def on_ocr_activate(self,ocr_menu_item):
 		"""Performs OCR on current tab."""
 		current=self.notebook.get_current_page()
@@ -48,6 +51,7 @@ class ExcavareMain:
 		iter=tm.get_iter(current)
 		filename=tm.get_value(iter,2)
 		drawable.do_ocr(self,filename)
+	
 	def on_save_menu_item_activate(self,save_menu_item):
 		current=self.notebook.get_current_page()
 		tm=self.treeview.get_model()
@@ -123,6 +127,7 @@ class ExcavareMain:
 			new_file = open(finalName,"w")
 			new_file.write(all_text)
 			new_file.close()
+	
 	def on_back_button_clicked(self,back_button):
 		current=self.notebook.get_current_page()
 		tm=self.treeview.get_model()
@@ -160,6 +165,7 @@ class ExcavareMain:
 			event.add(image)
 			event.queue_draw()
 			self.notebook.show_all()
+	
 	def on_forward_button_clicked(self,forward_button):
 		current=self.notebook.get_current_page()
 		tm=self.treeview.get_model()
@@ -198,6 +204,7 @@ class ExcavareMain:
 			event.add(image)
 			event.queue_draw()
 			self.notebook.show_all()
+	
 	def on_open_menu_item_activate(self,widget):
 		self.fileNavigator.show()
 
@@ -276,42 +283,24 @@ class ExcavareMain:
 					else:
 						break
 			workspace.close()			
-#	def on_quit_menu_item_activate(self,quit_menu_item):
-#		textbuff=self.textview.get_buffer()
-#		if textbuff.get_modified():
-#			self.dialog.show()
-#		else:
-#			gtk.main_quit()
-#		#textbuff.set_modified(False)	
-		#the above resets the text buffer, I don't want
-		#to lose the code but neither of these situations
-		#should reset the buffer, which should ONLY be 
-		#reset after a save
-#	def on_quit_Ok_clicked(self,quit_Ok):
-#		gtk.main_quit()
-#	def on_quit_Cancel_clicked(self,quit_Cancel):
-#		self.dialog.hide()
+
 	def on_new_menu_item_activate(self,new_menu_item):
 		newScrolledWindow,newTextView=create_scrolled_window()
 		newTab=gtk.Label("new")
 		self.notebook.append_page(newScrolledWindow,newTab)
 		self.tab_nums=self.tab_nums+1
-		#put new textview in list of textviews
 		self.textviews.append(newTextView)
 		self.list_store.append(["new",self.tab_nums,None,1,0,False])
 		self.notebook.show_all()
-#		textbuff=self.textview.get_buffer()
-#		if textbuff.get_modified():
-#			print 'Something changed'
-#		else:
-#			print 'No change'
-#		textbuff.set_modified(False)
+
 	def __init__(self):
 		builder = gtk.Builder()
-		builder.add_from_file("excavareH.glade")
+		builder.add_from_file("interface.glade")
+		
+		#Interface configuration options
+		
 		settings = gtk.settings_get_default()
 		settings.props.gtk_button_images = True
-		#get main window Excavare and textview
 		self.excavare = builder.get_object("Excavare")
 		self.excavare.set_title("Excavare")
 		self.excavare.maximize()
@@ -325,37 +314,25 @@ class ExcavareMain:
 		self.scrolledwindow2 = builder.get_object("scrolledwindow2")
 		self.total_pages = 0
 		self.current_selection = None
-		#self.textview = builder.get_object("textview")
-		#self.textview.set_left_margin(50)
-		#self.textview.set_right_margin(50)
-		#get the treeview and set its model to a liststore with strings
 		self.treeview = builder.get_object("treeview1")
 		self.pdfda = builder.get_object("pdfda")
 		self.fileNavigator = builder.get_object("fileNavigator")
-		#create a list store which holds tab name, tab number, filename, 
-		#number of pages, current page and whether the file has been saved once
 		self.list_store = gtk.ListStore(str,int,str,int,int,bool)
 		self.treeview.set_model(self.list_store)
-		#get the notebook so we can add pages to it when needed
 		self.notebook = builder.get_object("notebook1")
-		#put a column named Files in the tree
 		self.column = gtk.TreeViewColumn('Files')
 		self.treeview.append_column(self.column)
-		#get a CellRenderer and pack it, set the column attributes
 		self.cell = gtk.CellRendererText()
 		self.column.pack_start(self.cell, True)
 		self.column.set_attributes(self.cell, text=0)
-		#set the number of tabs to 1 and add text editor to list
 		self.tab_nums = -1
-		#self.list_store.append(["TextEditor",self.tab_nums,None,1,0,False])
-		###THE FOLLOWING IS FOR DEMO PURPOSES ONLY AND WILL BE COMPLETELY DIFFERENT WHEN MORE TIME IS ALLOTTED
 		self.page=0
 		self.scale = 1
-		
-		###END THAT PART
 		self.is_workspace=False
 		builder.connect_signals(self)
 		self.textviews = []
+		
+	#renders a PDF on screen when opened
 		
 	def pdf_render(self, widget, event):
 		pdfRead.get_pdf(self, self.current_selection)
