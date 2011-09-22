@@ -5,7 +5,7 @@ An integrated research environment as smart as you are...eventually.
 
 Written by Andrew Carpenter'11 and Jeff Gullett '11, for our Senior Seminar Project, at Transylvania University.
 
-This is Jeff's first 'python'/'GTK+' based project and is no longer under active development.
+This is Jeff's first `python`/`GTK+` based project and is no longer under active development.
 
 Features
 -----
