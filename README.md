@@ -3,7 +3,7 @@ Excavare
 
 An integrated research environment as smart as you are...eventually.
 
-Written by Andrew Carpenter'11 and Jeff Gullett '11, for our Senior Seminar Project, at [Transylvania University].
+Written by Andrew Carpenter'11 and Jeff Gullett '11, for our Senior Seminar Project, at Transylvania University.
 
 This is Jeff's first Python project and is no longer under active development.
 
@@ -21,5 +21,3 @@ Setup
 -----
 
 Coming soon!
-
-    [Transylvania University]: http://transy.edu/
