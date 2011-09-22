@@ -21,3 +21,5 @@ Setup
 -----
 
 Coming soon!
+
+    [Transylvania University]: http://transy.edu/
