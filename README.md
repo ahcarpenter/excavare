@@ -1,23 +1,12 @@
 Excavare
 ====================
+Excavare is a tool for facilitating information gathering and analysis during the research process.
 
-An integrated research environment as smart as you are...eventually.
-
-Written by Andrew Carpenter'11 and Jeff Gullett '11, for our Senior Seminar Project, at Transylvania University.
-
-This is Jeff's first `python`/`GTK+` based project and is no longer under active development.
+A work in progress that was begun as a toy project for a course I took.
 
 Features
 -----
-
-DISCLAIMER: This desktop application is in the early stages of development.
-
-- PDF editing.
-- PDF to text. Also, OCR allows users to convert non-digital documents that have been scanned and uploaded to your workspace in to a digital format.
-- Document Manager. Allows the user to view 
-- Coming Soon! Quickly determine where the most relevant text within your largest document(s) is located with the aid of the Circos Graph API.
-
-Setup
------
-
-Coming soon!
+- OCR- edit, mine and store text from scanned images of handwritten, typewritten or printed text.
+- File Manager - including support for *.pdf and *.docx
+- Text Analytics - bag-of-words and beyond, supporting per page term frequency counts. Allows users to easily structure the information content of even their most lengthy, dense documents.
+- Radial Document Visualization - visualize document-term matrices, including per page term frequency counts, in a easy-to-read circular format courtesy of the Circos Graph API. Imagine having 1000 unread documents in your workspace, each with 1000 pages of unread text. How quickly could you determine which page is most relevant to your investigation?
