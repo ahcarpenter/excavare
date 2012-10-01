@@ -1,6 +1,6 @@
 Excavare
 ====================
-As an aside, coding for this, initially toy project, began during a course I took during my senior year at Transylvania University. I am open to letting someone pick-up this project from where my partner and I left off, albeit sans compensation.
+As an aside, coding for this, initially toy project, began during a course I took during my senior year at Transylvania University.
 
 
 Features
